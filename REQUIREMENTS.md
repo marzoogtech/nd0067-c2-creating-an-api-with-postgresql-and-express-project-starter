@@ -5,38 +5,43 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
+- Index: api/products [GET] 
+- Show: api/products/:id [GET]
+- Create [token required]: api/products [POST]
 - [OPTIONAL] Top 5 most popular products 
 - [OPTIONAL] Products by category (args: product category)
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Index [token required]: api/users [GET]
+- Show [token required]: api/users/:id [GET]
+- Create [token required]: api/users [POST]
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Current Order by user (args: user id)[token required]: api/orders/:userId [GET]
+- [OPTIONAL] Completed Orders by user (args: user id)[token required] not implemented.
+- Create an Order [token required]: api/orders [POST] 
+- Add product to order [token required]: api/orders [PUT]
 
 ## Data Shapes
-#### Product
--  id
-- name
-- price
-- [OPTIONAL] category
+#### products
+- id (SERIAL PRIMARY KEY) 
+- productName (VARCHAR(50))
+- price (DECIMAL) 
+- [OPTIONAL] category (CARCHAR(50))
 
-#### User
-- id
-- firstName
-- lastName
-- password
+#### users
+- id (VARCHAR(50) UNIQUE PRIMARY KEY) 
+- firstName (VARCHAR(50))
+- lastName (VARCHAR(50))
+- password (TEXT)
 
-#### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+#### orders
+- id (SERIAL PRIMARY KEY)
+- userId (VARCHAR(50))
+- orderStatues (ENUM(' active', 'complete'))
 
+#### order_products 
+- id (SERIAL PRIMARY KEY)
+- order_id (BIGINT)
+- product_id (BIGINT)
+-product_qty (INTEGER)
